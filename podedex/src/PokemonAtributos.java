@@ -1,49 +1,92 @@
+import com.google.gson.annotations.SerializedName;
 
+import java.security.PublicKey;
+import java.util.List;
 
-@JsonIngnorePreperties(ignoreUnknom = true)
- class PokemonAtributos {
+public class PokemonAtributos {
     private String name;
-    private String generation;
-    private String type;
-    private int number;
-    private int life;
+    private int id;
+    private List<TypeInfo> types;
+    private List<StatInfo> stats;
 
-    @Override
-    public String toString() {
-        return "PokemonAtributos{" +
-                "name='" + name + '\'' +
-                ", generation='" + generation + '\'' +
-                ", type='" + type + '\'' +
-                ", number=" + number +
-                ", life=" + life +
-                '}';
-    }
+    public PokemonAtributos() {}
 
     public String getName() {
         return name;
     }
 
-    public String getGeneration() {
-        return generation;
+    public int getId() {
+        return id;
     }
 
-    public String getType() {
-        return type;
+    public List<TypeInfo> getTypes() {
+        return types;
     }
 
-    public int getNumber() {
-        return number;
+    public List<StatInfo> getStats() {
+        return stats;
+    }
+    // classe container, ela tem o objeto do tipo TYPE
+    public static class TypeInfo {
+        @SerializedName("type")
+        private Type type;
+
+        public TypeInfo() {}
+
+        public Type getType() {
+            return type;
+        }
+        @Override
+        public String toString(){
+            return type.getName();
+        }
     }
 
-    public int getLife() {
-        return life;
+    public static class Type {
+        private String name;
+
+        public Type() {}
+
+        public String getName() {
+            return name;
+        }
     }
 
-    public PokemonAtributos(String name, String generation, String type, int number, int life) {
-        this.name = name;
-        this.generation = generation;
-        this.type = type;
-        this.number = number;
-        this.life = life;
+    public static class StatInfo {
+        @SerializedName("base_stat")
+        private int baseStat;
+
+        @SerializedName("stat")
+        private Stat stat;
+
+        public StatInfo() {}
+
+        public int getBaseStat() {
+            return baseStat;
+        }
+
+        public Stat getStat() {
+            return stat;
+        }
+        @Override
+        public String toString() {
+            return stat.getName() + ": " + baseStat;
+        }
+
+    }
+
+    public static class Stat {
+        private String name;
+
+        public Stat() {}
+
+        public String getName() {
+            return name;
+        }
+        @Override
+        public String toString() {
+            return name;
+        }
+
     }
 }

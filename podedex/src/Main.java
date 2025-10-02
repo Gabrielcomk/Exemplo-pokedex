@@ -28,6 +28,7 @@ public class Main {
             HttpResponse<String> response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
 
+            // Erro se digitar errado ou com chave/API. Com request HttpClient, 200 acontece quando tá certo, logo se for diferente, é erro.
             if (response.statusCode() != 200) {
                 System.out.println("Erro: Pokémon não encontrado ou problema na API (código " + response.statusCode() + ")");
                 return;
@@ -45,6 +46,7 @@ public class Main {
             System.out.println("Tipo: " + meuPokemon.getTypes());
             System.out.println("Info: " + meuPokemon.getStats());
 
+            // erros trytach
         } catch (IOException | InterruptedException e) {
             System.out.println("Erro de conexão: " + e.getMessage());
         } catch (JsonSyntaxException e) {
